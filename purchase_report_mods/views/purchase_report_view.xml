@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
         <record model="ir.ui.view" id="view_purchase_order_pivot">
-            <field name="name">product.month.pivot</field>
+            <field name="name">product.month.pivot.inherit</field>
             <field name="model">purchase.report</field>
             <field name="inherit_id" ref="purchase.view_purchase_order_pivot"/>
             <field name="arch" type="xml">
@@ -52,7 +52,7 @@
 
 
         <record id="view_purchase_order_search" model="ir.ui.view">
-            <field name="name">report.purchase.order.search</field>
+            <field name="name">report.purchase.order.search.inherit</field>
             <field name="model">purchase.report</field>
             <field name="inherit_id" ref="purchase.view_purchase_order_search"/>
             <field name="arch" type="xml">
