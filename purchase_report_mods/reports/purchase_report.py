@@ -17,6 +17,7 @@ class PurchaseReport(models.Model):
     x_studio_estado = fields.Char('Estado', readonly=True)
     x_studio_estado_de_los_das = fields.Char('Estado de los días', readonly=True)
     x_studio_posicion_sap = fields.Char('Posición SAP', readonly=True)
+    partner_ref = fields.Char('Documento compras', readonly=True)
 
     def _select(self):
         select_str = """
@@ -29,6 +30,8 @@ class PurchaseReport(models.Model):
                     l.x_studio_estado,
                     l.x_studio_estado_de_los_das,
                     l.x_studio_posicin_sap as x_studio_posicion_sap,
+                    l.qty_received,
+                    s.partner_ref as partner_ref,
                     s.date_order as date_order,
                     s.state,
                     s.date_approve,
@@ -82,6 +85,7 @@ class PurchaseReport(models.Model):
                 s.company_id,
                 s.user_id,
                 s.partner_id,
+                s.partner_ref,
                 u.factor,
                 s.currency_id,
                 l.price_unit,
@@ -108,6 +112,7 @@ class PurchaseReport(models.Model):
                 l.x_studio_estado,
                 l.x_studio_estado_de_los_das,
                 l.x_studio_posicin_sap,
-                l.x_studio_comentarios
+                l.x_studio_comentarios,
+                l.qty_received
         """
         return group_by_str

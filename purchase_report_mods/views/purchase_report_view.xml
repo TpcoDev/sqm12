@@ -11,6 +11,9 @@
                     <field name="x_studio_estado" type="measure"/>
                     <field name="x_studio_estado_de_los_das" type="measure"/>
                     <field name="x_studio_posicion_sap" type="measure"/>
+                    <field name="x_studio_comentarios" type="measure"/>
+                    <field name="partner_ref" type="measure"/>
+                    <field name="qty_received" type="measure"/>
                 </field>
             </field>
         </record>
@@ -63,6 +66,8 @@
                     <filter string="Estado" name="estado_gb" context="{'group_by':'x_studio_estado'}"/>
                     <filter string="Estado de los días" name="estado_dias_gb" context="{'group_by':'x_studio_estado_de_los_das'}"/>
                     <filter string="Posición SAP" name="posicion_sap_gb" context="{'group_by':'x_studio_posicion_sap'}"/>
+                    <filter string="Documento de Compra" name="partner_ref_purchase" context="{'group_by':'partner_ref'}"/>
+                    <filter string="Cantidad recibida" name="qty_received_purchase" context="{'group_by':'qty_received'}"/>
                 </xpath>
             </field>
         </record>
