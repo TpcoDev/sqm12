@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model="ir.ui.view" id="view_purchase_order_pivot">
+            <field name="name">product.month.pivot</field>
+            <field name="model">purchase.report</field>
+            <field name="inherit_id" ref="purchase.view_purchase_order_pivot"/>
+            <field name="arch" type="xml">
+                <field name="price_average" position="after" >
+                    <field name="x_studio_activacin" type="measure"/>
+                    <field name="x_studio_dias_de_atraso" type="measure"/>
+                    <field name="x_studio_estado" type="measure"/>
+                    <field name="x_studio_estado_de_los_das" type="measure"/>
+                    <field name="x_studio_posicion_sap" type="measure"/>
+                </field>
+            </field>
+        </record>
+        
+        <!--<record model="ir.ui.view" id="view_purchase_order_graph">
+            <field name="name">product.month.graph</field>
+            <field name="model">purchase.report</field>
+            <field name="arch" type="xml">
+                <graph string="Purchase Orders Statistics">
+                    <field name="partner_id" type="row"/>
+                    <field name="date_order" interval="month" type="col"/>
+                    <field name="price_average" type="measure"/>
+                </graph>
+            </field>
+        </record>-->
+
+        <!-- Custom reports (aka filters) -->
+        <!--<record id="filter_purchase_order_monthly_purchases" model="ir.filters">
+            <field name="name">Monthly Purchases</field>
+            <field name="model_id">purchase.report</field>
+            <field name="domain">[('state','!=','cancel')]</field>
+            <field name="user_id" eval="False"/>
+            <field name="context">{'group_by': ['category_id'], 'col_group_by': ['date_order:month'], 'measures': ['unit_quantity']}</field>
+        </record>
+        <record id="filter_purchase_order_price_per_supplier" model="ir.filters">
+            <field name="name">Price Per Vendor</field>
+            <field name="model_id">purchase.report</field>
+            <field name="domain">[('state','!=','draft'),('state','!=','cancel')]</field>
+            <field name="user_id" eval="False"/>
+            <field name="context">{'group_by': ['partner_id'], 'col_group_by': ['product_id'], 'measures': ['price_average']}</field>
+        </record>
+        <record id="filter_purchase_order_average_delivery_time" model="ir.filters">
+            <field name="name">Average Delivery Time</field>
+            <field name="model_id">purchase.report</field>
+            <field name="domain">[('state','!=','draft'),('state','!=','cancel')]</field>
+            <field name="user_id" eval="False"/>
+            <field name="context">{'group_by': ['partner_id'], 'measures': ['delay_pass']}</field>
+        </record>-->
+
+
+        <record id="view_purchase_order_search" model="ir.ui.view">
+            <field name="name">report.purchase.order.search</field>
+            <field name="model">purchase.report</field>
+            <field name="inherit_id" ref="purchase.view_purchase_order_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@string='Group By...']/filter[@string='Order Date']" position="after">
+                    <separator/>
+                    <filter string="Activación" context="{'group_by':'x_studio_activacin'}"/>
+                    <filter string="Días de atraso" context="{'group_by':'x_studio_dias_de_atraso'}"/>
+                    <filter string="Estado" context="{'group_by':'x_studio_estado'}"/>
+                    <filter string="Estado de los días" context="{'group_by':'x_studio_estado_de_los_das'}"/>
+                    <filter string="Posición SAP" context="{'group_by':'x_studio_posicion_sap'}"/>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>
