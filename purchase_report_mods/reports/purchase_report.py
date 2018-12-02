@@ -28,7 +28,7 @@ class PurchaseReport(models.Model):
                     l.x_studio_dias_de_atraso,
                     l.x_studio_estado,
                     l.x_studio_estado_de_los_das,
-                    l.x_studio_posicion_sap,
+                    l.x_studio_posicin_sap as x_studio_posicion_sap,
                     s.date_order as date_order,
                     s.state,
                     s.date_approve,
