@@ -56,7 +56,7 @@
             <field name="model">purchase.report</field>
             <field name="inherit_id" ref="purchase.view_purchase_order_search"/>
             <field name="arch" type="xml">
-                <xpath expr="//group[1]/filter[@name='order_month']" position="after">
+                <xpath expr="//group[0]/filter[@name='order_month']" position="after">
                     <separator/>
                     <filter string="Activación" context="{'group_by':'x_studio_activacin'}"/>
                     <filter string="Días de atraso" context="{'group_by':'x_studio_dias_de_atraso'}"/>
