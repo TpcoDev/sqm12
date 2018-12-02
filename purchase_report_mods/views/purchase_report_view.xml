@@ -58,11 +58,11 @@
             <field name="arch" type="xml">
                 <xpath expr="//group[2]/filter[@name='order_month']" position="after">
                     <separator/>
-                    <filter string="Activación" context="{'group_by':'x_studio_activacin'}"/>
-                    <filter string="Días de atraso" context="{'group_by':'x_studio_dias_de_atraso'}"/>
+                    <filter string="Activacion" context="{'group_by':'x_studio_activacin'}"/>
+                    <filter string="Dias de atraso" context="{'group_by':'x_studio_dias_de_atraso'}"/>
                     <filter string="Estado" context="{'group_by':'x_studio_estado'}"/>
-                    <filter string="Estado de los días" context="{'group_by':'x_studio_estado_de_los_das'}"/>
-                    <filter string="Posición SAP" context="{'group_by':'x_studio_posicion_sap'}"/>
+                    <filter string="Estado de los dias" context="{'group_by':'x_studio_estado_de_los_das'}"/>
+                    <filter string="Posicion SAP" context="{'group_by':'x_studio_posicion_sap'}"/>
                 </xpath>
             </field>
         </record>
