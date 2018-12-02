@@ -9,7 +9,8 @@ from odoo import api, fields, models, tools
 
 
 class PurchaseOrderLine(models.Model):
-    _inherit = ["purchase.order.line", 'mail.thread', 'mail.activity.mixin', 'portal.mixin']    
+    _inherit = ["purchase.order.line", 'mail.thread', 'mail.activity.mixin', 'portal.mixin']
+    _name = "purchase.order.line"
 
 class PurchaseReport(models.Model):
     _inherit = ["purchase.report"]
