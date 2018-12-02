@@ -18,6 +18,7 @@ class PurchaseReport(models.Model):
     x_studio_estado_de_los_das = fields.Char('Estado de los días', readonly=True)
     x_studio_posicion_sap = fields.Char('Posición SAP', readonly=True)
     partner_ref = fields.Char('Documento compras', readonly=True)
+    qty_received = fields.Float('Cantidad recibida', digits=(16, 3), readonly=True)
 
     def _select(self):
         select_str = """
