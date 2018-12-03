@@ -12,6 +12,14 @@ class PurchaseOrderLine(models.Model):
     _inherit = ["purchase.order.line", 'mail.thread', 'mail.activity.mixin', 'portal.mixin']
     _name = "purchase.order.line"
 
+    @api.multi
+    def write(self, vals):
+        if 'x_studio_comentarios' in vals:
+            super(PurchaseOrderLine, self).write(vals)
+            record = self.search([('id', '=', self.id)])
+            vals.update({'x_studio_hist_comentarios': vals.get('x_studio_comentarios', '') + "\n\n" + record.x_studio_hist_comentarios})
+        return super(PurchaseOrderLine, self).write(vals)
+
 class PurchaseReport(models.Model):
     _inherit = ["purchase.report"]
 
