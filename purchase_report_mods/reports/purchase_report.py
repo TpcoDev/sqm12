@@ -17,7 +17,7 @@ class PurchaseOrderLine(models.Model):
         if 'x_studio_comentarios' in vals:
             super(PurchaseOrderLine, self).write(vals)
             record = self.search([('id', '=', self.id)])
-            vals.update({'x_studio_hist_comentarios': vals.get('x_studio_comentarios', '') + "\n\n" + fields.datetime.now(tz = pytz.timezone(self.env.user.partner_id.tz)) + ": " + record.x_studio_hist_comentarios})
+            vals.update({'x_studio_hist_comentarios': vals.get('x_studio_comentarios', '') + "\n\n" + datetime.datetime.strptime(fields.datetime.now(tz = pytz.timezone(self.env.user.partner_id.tz)), '%d-%m-%Y %H:%M:%S') + ": " + record.x_studio_hist_comentarios})
         return super(PurchaseOrderLine, self).write(vals)
 
 class PurchaseReport(models.Model):
