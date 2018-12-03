@@ -1,1 +1,1 @@
-PyTextile
+textile
