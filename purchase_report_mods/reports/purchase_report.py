@@ -28,7 +28,8 @@ class PurchaseOrderLine(models.Model):
         record = super(PurchaseOrderLine, self).create(vals)
         if 'x_studio_comentarios' in vals:
             salto = "\n\n" if len(record.x_studio_hist_comentarios) > 0 else ""
-            record.write({'x_studio_hist_comentarios': textile.textile("<strong>" + fields.datetime.now(tz = pytz.timezone(self.env.user.partner_id.tz)).strftime('%d-%m-%Y %H:%M:%S') + " (" + self.env.user.partner_id.name + ")" + ":</strong> " + vals.get('x_studio_comentarios', ''))})
+            datet = fields.datetime.now(tz = pytz.timezone(self.env.user.partner_id.tz)).strftime('%d-%m-%Y %H:%M:%S') if self.env.user.partner_id.tz else fields.datetime.now()).strftime('%d-%m-%Y %H:%M:%S')
+            record.write({'x_studio_hist_comentarios': textile.textile("<strong>" + datet + " (" + self.env.user.partner_id.name + ")" + ":</strong> " + vals.get('x_studio_comentarios', ''))})
         return record
 
 class PurchaseReport(models.Model):
