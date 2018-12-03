@@ -7,6 +7,7 @@
 
 from odoo import api, fields, models, tools
 import pytz, datetime
+import textile
 
 class PurchaseOrderLine(models.Model):
     _inherit = ["purchase.order.line", 'mail.thread', 'mail.activity.mixin', 'portal.mixin']
@@ -18,7 +19,7 @@ class PurchaseOrderLine(models.Model):
             super(PurchaseOrderLine, self).write(vals)
             record = self.search([('id', '=', self.id)])
             salto = "\n\n" if len(record.x_studio_hist_comentarios) > 0 else ""
-            vals.update({'x_studio_hist_comentarios': fields.datetime.now(tz = pytz.timezone(self.env.user.partner_id.tz)).strftime('%d-%m-%Y %H:%M:%S') + ": " + vals.get('x_studio_comentarios') + salto + record.x_studio_hist_comentarios})
+            vals.update({'x_studio_hist_comentarios': textile.textile(str(fields.datetime.now(tz = pytz.timezone(self.env.user.partner_id.tz)).strftime('%d-%m-%Y %H:%M:%S') + ": " + vals.get('x_studio_comentarios') + salto + record.x_studio_hist_comentarios))})
         return super(PurchaseOrderLine, self).write(vals)
 
 class PurchaseReport(models.Model):
