@@ -21,6 +21,14 @@ class PurchaseOrderLine(models.Model):
             salto = "\n\n" if len(record.x_studio_hist_comentarios) > 0 else ""
             vals.update({'x_studio_hist_comentarios': textile.textile("<strong>" + fields.datetime.now(tz = pytz.timezone(self.env.user.partner_id.tz)).strftime('%d-%m-%Y %H:%M:%S') + " (" + self.env.user.partner_id.name + ")" + ":</strong> " + vals.get('x_studio_comentarios') + salto) + record.x_studio_hist_comentarios})
         return super(PurchaseOrderLine, self).write(vals)
+    
+    @api.model
+    def create(self, vals):
+        record = super(PurchaseOrderLine, self).create(vals)
+        if 'x_studio_comentarios' in vals:
+            salto = "\n\n" if len(record.x_studio_hist_comentarios) > 0 else ""
+            record.write({'x_studio_hist_comentarios': textile.textile("<strong>" + fields.datetime.now(tz = pytz.timezone(self.env.user.partner_id.tz)).strftime('%d-%m-%Y %H:%M:%S') + " (" + self.env.user.partner_id.name + ")" + ":</strong> " + vals.get('x_studio_comentarios') + salto) + record.x_studio_hist_comentarios})
+        return record
 
 class PurchaseReport(models.Model):
     _inherit = ["purchase.report"]
