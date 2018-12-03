@@ -10,7 +10,7 @@ import pytz, datetime
 import textile
 
 class PurchaseOrderLine(models.Model):
-    _inherit = ["purchase.order.line", 'mail.thread', 'mail.activity.mixin', 'portal.mixin']
+    _inherit = ["purchase.order.line"]
     _name = "purchase.order.line"
 
     @api.multi
