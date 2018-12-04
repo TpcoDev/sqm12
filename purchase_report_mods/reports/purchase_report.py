@@ -25,6 +25,7 @@ class PurchaseOrderLine(models.Model):
     
     @api.model
     def create(self, vals):
+        
         record = super(PurchaseOrderLine, self).create(vals)
         if 'x_studio_comentarios' in vals:
             salto = "\n\n" if len(record.x_studio_hist_comentarios) > 0 else ""
