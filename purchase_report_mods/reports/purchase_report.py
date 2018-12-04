@@ -20,7 +20,9 @@ class PurchaseOrderLine(models.Model):
             super(PurchaseOrderLine, self).write(vals)
             record = self.search([('id', '=', self.id)])
             salto = "\n\n" if record.x_studio_hist_comentarios and len(record.x_studio_hist_comentarios) > 0 else ""
-            vals.update({'x_studio_hist_comentarios': textile.textile("<strong>" + fields.datetime.now(tz = pytz.timezone(self.env.user.partner_id.tz)).strftime('%d-%m-%Y %H:%M:%S') + " (" + self.env.user.partner_id.name + ")" + ":</strong> " + vals.get('x_studio_comentarios', '') + salto) + record.x_studio_hist_comentarios})
+            x_studio_hist_comentarios = record.x_studio_hist_comentarios if record.x_studio_hist_comentarios and len(record.x_studio_hist_comentarios) > 0 else ""
+            datet = fields.datetime.now(tz = pytz.timezone(self.env.user.partner_id.tz)).strftime('%d-%m-%Y %H:%M:%S') if self.env.user.partner_id.tz else fields.datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+            vals.update({'x_studio_hist_comentarios': textile.textile("<strong>" + datet + " (" + self.env.user.partner_id.name + ")" + ":</strong> " + vals.get('x_studio_comentarios', '') + salto) + x_studio_hist_comentarios})
         return super(PurchaseOrderLine, self).write(vals)
     
     @api.model
@@ -29,8 +31,9 @@ class PurchaseOrderLine(models.Model):
         record = super(PurchaseOrderLine, self).create(vals)
         if 'x_studio_comentarios' in vals:
             salto = "\n\n" if record.x_studio_hist_comentarios and len(record.x_studio_hist_comentarios) > 0 else ""
+            x_studio_hist_comentarios = record.x_studio_hist_comentarios if record.x_studio_hist_comentarios and len(record.x_studio_hist_comentarios) > 0 else ""
             datet = fields.datetime.now(tz = pytz.timezone(self.env.user.partner_id.tz)).strftime('%d-%m-%Y %H:%M:%S') if self.env.user.partner_id.tz else fields.datetime.now().strftime('%d-%m-%Y %H:%M:%S')
-            record.write({'x_studio_hist_comentarios': textile.textile("<strong>" + datet + " (" + self.env.user.partner_id.name + ")" + ":</strong> " + vals.get('x_studio_comentarios', '') + salto) + record.x_studio_hist_comentarios})
+            record.write({'x_studio_hist_comentarios': textile.textile("<strong>" + datet + " (" + self.env.user.partner_id.name + ")" + ":</strong> " + vals.get('x_studio_comentarios', '') + salto) + x_studio_hist_comentarios})
         return record
 
 class PurchaseReport(models.Model):
